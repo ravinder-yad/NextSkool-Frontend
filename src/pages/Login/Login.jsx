@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { HiOutlineUser, HiOutlineLockClosed } from 'react-icons/hi2';
-import { FcGoogle } from 'react-icons/fc';
-import { FaFacebookF } from 'react-icons/fa';
+import { HiOutlineUser, HiOutlineLockClosed, HiOutlineEye } from 'react-icons/hi2';
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,86 +14,84 @@ const Login = () => {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-3 tracking-wider uppercase">
-        Login
+      <h2 className="text-[32px] font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+        Hello!
       </h2>
-      <p className="text-sm md:text-base text-slate-500 font-medium mb-10 tracking-wide text-center">
-        Welcome to NextSkool. Please login to continue.
+      <p className="text-[14px] text-slate-500 dark:text-slate-400 font-medium mb-10 text-center">
+        Sign in to your account
       </p>
 
-      <form onSubmit={handleSubmit} className="w-full space-y-8">
+      <form onSubmit={handleSubmit} className="w-full flex flex-col items-center space-y-6">
         
-        {/* Email Input */}
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
-            <HiOutlineUser className="text-slate-400 text-xl md:text-2xl" />
+        {/* Email Input - Exact Match */}
+        <div className="relative w-full">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <HiOutlineUser className="text-[#8B5CF6] text-xl" />
           </div>
           <input 
             type="email" 
-            placeholder="Email ID"
-            className="w-full pl-10 pr-3 py-3 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-base md:text-lg text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            placeholder="E-mail"
+            className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-[#1E293B] rounded-[20px] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/50 transition-all placeholder:text-slate-400 font-medium border border-[#8B5CF6]/30 shadow-[0_4px_20px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
             required
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
           />
         </div>
 
-        {/* Password Input */}
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
-            <HiOutlineLockClosed className="text-slate-400 text-xl md:text-2xl" />
+        {/* Password Input - Exact Match */}
+        <div className="relative w-full">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <HiOutlineLockClosed className="text-[#8B5CF6] text-xl" />
           </div>
           <input 
-            type="password" 
+            type={showPassword ? "text" : "password"} 
             placeholder="Password"
-            className="w-full pl-10 pr-3 py-3 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-base md:text-lg text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            className="w-full pl-12 pr-12 py-3.5 bg-white dark:bg-[#1E293B] rounded-[20px] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/50 transition-all placeholder:text-slate-400 font-medium border border-[#8B5CF6]/30 shadow-[0_4px_20px_rgb(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)]"
             required
             value={formData.password}
             onChange={(e) => setFormData({...formData, password: e.target.value})}
           />
+          <button 
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute inset-y-0 right-0 pr-4 flex items-center text-[#8B5CF6] hover:text-[#5B21B6] transition-colors"
+          >
+            <HiOutlineEye className="text-xl" />
+          </button>
         </div>
 
-        {/* Links */}
-        <div className="flex justify-between items-center text-sm md:text-base font-medium w-full mt-4">
-          <label className="flex items-center gap-2 text-slate-500 cursor-pointer">
-            <input type="checkbox" className="w-4 h-4 rounded-sm border-slate-300 text-indigo-600 focus:ring-indigo-500" />
-            Remember
+        {/* Remember & Forgot */}
+        <div className="w-full flex items-center justify-between px-2">
+          <label className="flex items-center gap-2 cursor-pointer group">
+            <div className="w-4 h-4 rounded border-2 border-[#8B5CF6] flex items-center justify-center bg-transparent group-hover:bg-[#8B5CF6]/10 transition-colors">
+              {/* Fake checked state for UI purposes */}
+              <div className="w-2 h-2 bg-[#8B5CF6] rounded-sm opacity-100"></div>
+            </div>
+            <span className="text-[12px] font-semibold text-[#8B5CF6]">Remember me</span>
           </label>
-          <Link to="/forgot-password" className="text-slate-400 hover:text-indigo-600 transition-colors">
-            Forgot Password?
+          <Link to="/forgot-password" className="text-[12px] font-semibold text-[#8B5CF6] hover:text-[#5B21B6] transition-colors">
+            Forgot password?
           </Link>
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-center pt-6">
+        <div className="pt-4 w-full flex justify-center">
           <button 
             type="submit"
-            className="px-12 py-3.5 md:py-4 bg-[#5A52E5] hover:bg-indigo-700 text-white text-base md:text-lg font-bold rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-1 transition-all duration-300 tracking-wider w-full max-w-[200px]"
+            className="w-[200px] py-3.5 bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6] hover:from-[#7C3AED] hover:to-[#2563EB] text-white text-[13px] font-extrabold tracking-widest rounded-full shadow-[0_10px_25px_rgba(139,92,246,0.3)] hover:shadow-[0_15px_30px_rgba(139,92,246,0.4)] transition-all duration-300 uppercase"
           >
-            LOGIN
+            Sign In
           </button>
         </div>
       </form>
 
-      {/* Social Logins */}
-      <div className="mt-12 flex flex-col items-center">
-        <p className="text-sm text-slate-400 font-medium mb-5">Or sign in with</p>
-        <div className="flex gap-5">
-          <button className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm bg-white">
-            <FcGoogle size={22} />
-          </button>
-          <button className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 bg-[#1877F2] flex items-center justify-center hover:bg-[#166FE5] transition-colors shadow-sm text-white">
-            <FaFacebookF size={20} />
-          </button>
-        </div>
-      </div>
-
-      <p className="mt-10 text-center text-sm text-slate-500 font-medium">
+      <p className="mt-8 text-center text-[12px] text-[#8B5CF6] font-medium">
         Don't have an account?{' '}
-        <Link to="/register" className="text-[#5A52E5] hover:text-indigo-700 font-bold transition-colors">
-          Sign up
+        <Link to="/register" className="font-bold hover:text-[#5B21B6] transition-colors">
+          Create
         </Link>
       </p>
+
     </div>
   );
 };
