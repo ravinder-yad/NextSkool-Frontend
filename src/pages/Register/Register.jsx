@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
+import { HiOutlineUser, HiOutlineLockClosed, HiOutlineEnvelope, HiOutlinePhone } from 'react-icons/hi2';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,124 +18,108 @@ const Register = () => {
       alert("Passwords don't match!");
       return;
     }
-    // Dummy register logic
     navigate('/verify-otp');
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
-        Create Your Account
+    <div className="w-full flex flex-col items-center">
+      <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase">
+        Sign Up
       </h2>
-      <p className="text-slate-500 dark:text-slate-400 font-medium mb-8">
-        Join NextSkool and accelerate your tech career.
+      <p className="text-xs text-slate-400 font-medium mb-8 tracking-wide text-center">
+        Create an account to start learning.
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="w-full space-y-5">
         
-        {/* Full Name */}
-        <div>
-          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-            Full Name
-          </label>
+        {/* Full Name Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineUser className="text-slate-400 text-lg" />
+          </div>
           <input 
             type="text" 
-            placeholder="John Doe"
-            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
+            placeholder="Full Name"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
             required
             value={formData.fullName}
             onChange={(e) => setFormData({...formData, fullName: e.target.value})}
           />
         </div>
 
-        {/* Email & Phone Row */}
-        <div className="flex gap-4">
-          <div className="w-1/2">
-            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-              Email Address
-            </label>
-            <input 
-              type="email" 
-              placeholder="john@example.com"
-              className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-            />
+        {/* Email Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineEnvelope className="text-slate-400 text-lg" />
           </div>
-          <div className="w-1/2">
-            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-              Phone Number
-            </label>
-            <input 
-              type="tel" 
-              placeholder="+91 9876543210"
-              className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
-              required
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            />
-          </div>
+          <input 
+            type="email" 
+            placeholder="Email Address"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+          />
         </div>
 
-        {/* Password Row */}
-        <div className="flex gap-4">
-          <div className="w-1/2">
-            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-              Password
-            </label>
-            <input 
-              type="password" 
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
-              required
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-            />
+        {/* Phone Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlinePhone className="text-slate-400 text-lg" />
           </div>
-          <div className="w-1/2">
-            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-1.5">
-              Confirm Password
-            </label>
-            <input 
-              type="password" 
-              placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
-              required
-              value={formData.confirmPassword}
-              onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-            />
-          </div>
+          <input 
+            type="tel" 
+            placeholder="Phone Number"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            required
+            value={formData.phone}
+            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+          />
         </div>
 
-        <button 
-          type="submit"
-          className="w-full py-4 mt-4 bg-[#2563EB] hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_10px_20px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3)] hover:-translate-y-1 transition-all duration-300"
-        >
-          Create Account
-        </button>
+        {/* Password Inputs in one row if desired, but column is safer for this narrow layout */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineLockClosed className="text-slate-400 text-lg" />
+          </div>
+          <input 
+            type="password" 
+            placeholder="Password"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            required
+            value={formData.password}
+            onChange={(e) => setFormData({...formData, password: e.target.value})}
+          />
+        </div>
+
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineLockClosed className="text-slate-400 text-lg" />
+          </div>
+          <input 
+            type="password" 
+            placeholder="Confirm Password"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
+            required
+            value={formData.confirmPassword}
+            onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+          />
+        </div>
+
+        {/* Submit Button */}
+        <div className="flex justify-center pt-6">
+          <button 
+            type="submit"
+            className="px-10 py-2.5 bg-[#5A52E5] hover:bg-indigo-700 text-white text-sm font-bold rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-300 tracking-wider"
+          >
+            SIGN UP
+          </button>
+        </div>
       </form>
 
-      <div className="my-6 flex items-center gap-4">
-        <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
-        <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">OR</span>
-        <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
-      </div>
-
-      <div className="flex gap-3">
-        <button className="w-1/2 py-3 px-4 bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300 font-bold shadow-sm">
-          <FcGoogle size={20} />
-          Google
-        </button>
-        <button className="w-1/2 py-3 px-4 bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300 font-bold shadow-sm">
-          <FaGithub size={20} className="text-slate-900 dark:text-white" />
-          GitHub
-        </button>
-      </div>
-
-      <p className="mt-8 text-center text-slate-600 dark:text-slate-400 font-medium">
+      <p className="mt-8 text-center text-xs text-slate-500 font-medium">
         Already have an account?{' '}
-        <Link to="/login" className="text-[#2563EB] hover:text-blue-700 font-bold transition-colors">
+        <Link to="/login" className="text-[#5A52E5] hover:text-indigo-700 font-bold transition-colors">
           Login
         </Link>
       </p>

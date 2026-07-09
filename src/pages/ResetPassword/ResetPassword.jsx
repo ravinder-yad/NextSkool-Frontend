@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HiOutlineLockClosed } from 'react-icons/hi2';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -11,55 +12,60 @@ const ResetPassword = () => {
       alert("Passwords don't match!");
       return;
     }
-    // Dummy reset logic
     alert("Password updated successfully!");
     navigate('/login');
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
-        Reset Password
+    <div className="w-full flex flex-col items-center">
+      <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-widest uppercase">
+        Reset
       </h2>
-      <p className="text-slate-500 dark:text-slate-400 font-medium mb-8">
-        Create a strong and secure new password.
+      <p className="text-xs text-slate-400 font-medium mb-10 tracking-wide text-center px-4">
+        Create a new, strong password.
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-            New Password
-          </label>
+      <form onSubmit={handleSubmit} className="w-full space-y-6">
+        
+        {/* New Password Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineLockClosed className="text-slate-400 text-lg" />
+          </div>
           <input 
             type="password" 
-            placeholder="••••••••"
-            className="w-full px-5 py-3.5 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
+            placeholder="New Password"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
             required
             value={formData.newPassword}
             onChange={(e) => setFormData({...formData, newPassword: e.target.value})}
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-            Confirm Password
-          </label>
+        {/* Confirm Password Input */}
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
+            <HiOutlineLockClosed className="text-slate-400 text-lg" />
+          </div>
           <input 
             type="password" 
-            placeholder="••••••••"
-            className="w-full px-5 py-3.5 rounded-xl bg-slate-50 dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:border-transparent transition-all"
+            placeholder="Confirm Password"
+            className="w-full pl-8 pr-3 py-2 bg-transparent border-b-2 border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-500 transition-colors placeholder:text-slate-400 font-medium"
             required
             value={formData.confirmPassword}
             onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
           />
         </div>
 
-        <button 
-          type="submit"
-          className="w-full py-4 mt-4 bg-[#2563EB] hover:bg-blue-700 text-white font-bold rounded-xl shadow-[0_10px_20px_rgba(37,99,235,0.2)] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3)] hover:-translate-y-1 transition-all duration-300"
-        >
-          Update Password
-        </button>
+        {/* Submit Button */}
+        <div className="flex justify-center pt-4">
+          <button 
+            type="submit"
+            className="px-10 py-2.5 bg-[#5A52E5] hover:bg-indigo-700 text-white text-sm font-bold rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-300 tracking-wider"
+          >
+            UPDATE
+          </button>
+        </div>
       </form>
     </div>
   );

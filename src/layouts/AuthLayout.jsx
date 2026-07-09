@@ -1,120 +1,83 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { HiOutlineAcademicCap, HiOutlineTrophy, HiOutlineStar, HiOutlineCheckBadge, HiOutlineUsers } from 'react-icons/hi2';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
 
 const AuthLayout = () => {
+  const location = useLocation();
+  const isLogin = location.pathname === '/login';
+
   return (
-    <div className="min-h-screen flex w-full bg-white dark:bg-[#0B1121] overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F3F4F6] dark:bg-[#0B1121] relative overflow-hidden p-4 sm:p-8 pt-24 font-sans">
+      <Navbar />
       
-      {/* LEFT SIDE: Image & Floating Cards (60%) */}
-      <div className="hidden lg:flex lg:w-[60%] relative bg-[#EFF6FF] dark:bg-slate-900 overflow-hidden items-center justify-center p-12">
+      {/* Background Decorative Circles (Optional, for flavor) */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-indigo-200/50 dark:bg-indigo-900/30 rounded-full mix-blend-multiply blur-2xl"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-200/50 dark:bg-purple-900/30 rounded-full mix-blend-multiply blur-2xl"></div>
+
+      {/* Main Centered Floating Card */}
+      <div className="w-full max-w-[1050px] bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(79,70,229,0.2)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row relative z-10 min-h-[640px] border border-white/50 dark:border-slate-800 font-sans">
         
-        {/* Background Gradients & Circles */}
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-100 to-indigo-50 dark:from-slate-900 dark:to-slate-800 pointer-events-none"></div>
-        <div className="absolute top-1/4 -left-32 w-[600px] h-[600px] bg-blue-400/20 dark:bg-blue-600/10 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-lighten pointer-events-none"></div>
-        <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] bg-indigo-400/20 dark:bg-indigo-600/10 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-lighten pointer-events-none"></div>
-
-        <div className="relative z-10 w-full max-w-2xl h-full flex items-center justify-center animate-[float_6s_ease-in-out_infinite]">
-          {/* Main Illustration / Image */}
-          <div className="relative w-full aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/50 dark:border-slate-800/50 backdrop-blur-sm">
-            <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-              alt="Student learning" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-blue-600/10 mix-blend-overlay"></div>
+        {/* LEFT SIDE: Form Container (50%) */}
+        <div className="w-full md:w-1/2 p-10 sm:p-16 lg:p-20 flex flex-col justify-center relative z-20 bg-white dark:bg-slate-900">
+          
+          {/* Subtle decorative dot overlapping the border as seen in the image */}
+          <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 w-8 h-8 bg-white dark:bg-slate-900 rounded-full z-30 flex items-center justify-center shadow-sm">
+            <div className="w-2 h-2 bg-indigo-200 rounded-full"></div>
           </div>
 
-          {/* Floating Card 1 */}
-          <div className="absolute -top-6 -right-6 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-[float_5s_ease-in-out_infinite_0.5s] border border-slate-100 dark:border-slate-700">
-            <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center">
-              <HiOutlineAcademicCap size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-slate-500 font-medium">Courses</p>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white">300+</h4>
-            </div>
-          </div>
-
-          {/* Floating Card 2 */}
-          <div className="absolute top-1/3 -left-12 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-[float_6s_ease-in-out_infinite_1s] border border-slate-100 dark:border-slate-700">
-            <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 flex items-center justify-center">
-              <HiOutlineUsers size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-slate-500 font-medium">Students</p>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white">50K+</h4>
-            </div>
-          </div>
-
-          {/* Floating Card 3 */}
-          <div className="absolute -bottom-8 right-12 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-[float_7s_ease-in-out_infinite_1.5s] border border-slate-100 dark:border-slate-700">
-            <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 flex items-center justify-center">
-              <HiOutlineTrophy size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-slate-500 font-medium">Placement</p>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white">95%</h4>
-            </div>
-          </div>
-
-          {/* Floating Card 4 */}
-          <div className="absolute bottom-1/4 -left-8 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl flex items-center gap-4 animate-[float_5s_ease-in-out_infinite_2s] border border-slate-100 dark:border-slate-700">
-            <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 flex items-center justify-center">
-              <HiOutlineStar size={24} />
-            </div>
-            <div>
-              <p className="text-sm text-slate-500 font-medium">Rating</p>
-              <h4 className="text-xl font-bold text-slate-900 dark:text-white">4.9/5.0</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* RIGHT SIDE: Auth Form (40%) */}
-      <div className="w-full lg:w-[40%] flex flex-col justify-between min-h-screen bg-white dark:bg-[#0B1121] relative z-20 shadow-[-20px_0_40px_rgba(0,0,0,0.05)] dark:shadow-none border-l border-slate-100 dark:border-slate-800">
-        
-        {/* Top Branding */}
-        <div className="p-8 pb-0">
-          <Link to="/" className="flex items-center gap-2 group w-fit">
-            <div className="w-10 h-10 bg-[#2563EB] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform">
-              N
-            </div>
-            <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors">
-              NextSkool
-            </span>
-          </Link>
-        </div>
-
-        {/* Dynamic Form Content */}
-        <div className="flex-1 flex items-center justify-center p-8 sm:p-12">
-          <div className="w-full max-w-md animate-[fadeIn_0.5s_ease-out]">
+          <div className="w-full max-w-sm mx-auto animate-[fadeIn_0.4s_ease-out]">
             <Outlet />
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="p-8 pt-0">
-          <div className="border-t border-slate-200 dark:border-slate-800 pt-6">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-500 dark:text-slate-400">
-              <p>📧 support@nextskool.com</p>
-              <p>📞 +91 98765 43210</p>
-              <a href="https://nextskool.com" className="hover:text-[#2563EB] transition-colors">🌐 www.nextskool.com</a>
-            </div>
+        {/* RIGHT SIDE: Premium Image & Background (50%) */}
+        <div className="hidden md:flex md:w-1/2 bg-[#5A52E5] relative items-center justify-center p-12 lg:p-16 overflow-hidden">
+          
+          {/* Large decorative circular background shapes */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500 rounded-full translate-x-1/3 -translate-y-1/3 opacity-40 blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-400 rounded-full -translate-x-1/3 translate-y-1/3 opacity-20 blur-2xl pointer-events-none"></div>
+          
+          {/* Subtle Grid pattern overlay */}
+          <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+
+          {/* Floating Image Container */}
+          <div className="relative w-full max-w-[360px] aspect-[4/5] rounded-[2rem] overflow-hidden shadow-xl border-4 border-indigo-400/20 transform transition-transform duration-700 hover:scale-[1.02]">
+            <img 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Student" 
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Soft gradient overlay on image */}
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/30 to-transparent"></div>
           </div>
+
+          {/* Decorative element top left corner inside blue area */}
+          <div className="absolute top-12 left-12 w-16 h-16 border-2 border-indigo-400 rounded-full opacity-50"></div>
+          <div className="absolute top-16 left-16 w-8 h-8 bg-indigo-400 rounded-full opacity-30"></div>
+
         </div>
 
       </div>
 
-      {/* Add Custom Animations globally if not present in tailwind.config */}
+      {/* NextSkool Contact Footer (Outside the card) */}
+      <div className="mt-8 flex flex-col sm:flex-row justify-between w-full max-w-[1000px] text-sm font-medium text-slate-500 dark:text-slate-400 z-10 px-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-indigo-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold">
+            N
+          </div>
+          <span>NextSkool EdTech</span>
+        </div>
+        <div className="flex gap-6 mt-4 sm:mt-0">
+          <a href="mailto:support@nextskool.com" className="hover:text-indigo-600 transition-colors">support@nextskool.com</a>
+          <a href="https://nextskool.com" className="hover:text-indigo-600 transition-colors">www.nextskool.com</a>
+        </div>
+      </div>
+
+      {/* Custom Animations globally if not present in tailwind.config */}
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: scale(0.98); }
+          to { opacity: 1; transform: scale(1); }
         }
       `}} />
     </div>
