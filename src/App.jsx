@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AuthLayout from './layouts/AuthLayout';
 import Home from './pages/Home/Home';
+import Placements from './pages/Placements/Placements';
 
 // Auth Pages
 import Login from './pages/Login/Login';
@@ -18,6 +19,7 @@ function App() {
         {/* Main Website Routes */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route path="placements" element={<Placements />} />
           {/* Add more routes here later */}
         </Route>
 

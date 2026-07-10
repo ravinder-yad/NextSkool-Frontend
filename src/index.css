@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -9,6 +9,13 @@
   --color-brand-accent: #06B6D4;
   --color-brand-success: #22C55E;
   --color-brand-gray: #94A3B8;
+  
+  --animate-marquee: marquee 25s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
 }
 
 body {
