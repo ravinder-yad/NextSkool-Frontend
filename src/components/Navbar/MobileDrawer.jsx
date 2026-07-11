@@ -42,7 +42,7 @@ const MobileDrawer = ({ isOpen, onClose }) => {
   const navItems = [
     { name: 'Home', path: '/', icon: HiOutlineHome },
     { name: 'Explore', path: '/explore', icon: HiOutlineBookOpen },
-    { name: 'Categories', path: '/categories', icon: HiOutlineSquares2X2 },
+    { name: 'All Courses', path: '/courses', icon: HiOutlineSquares2X2 },
     { name: 'Live Classes', path: '/live-classes', icon: HiOutlineUserGroup },
     { name: 'Placements', path: '/placements', icon: HiOutlineBriefcase },
     { name: 'Blog', path: '/blog', icon: HiOutlineNewspaper },

@@ -7,25 +7,25 @@ import {
   HiOutlineShoppingCart,
   HiOutlineBars3,
   HiChevronDown,
-  HiOutlineRocketLaunch
+  HiOutlineRocketLaunch,
+  HiOutlineBookOpen
 } from 'react-icons/hi2';
+import * as HiIcons from 'react-icons/hi2';
 import ThemeToggle from '../Buttons/ThemeToggle';
 import MobileDrawer from './MobileDrawer';
 import Logo from '../common/Logo';
+import { exploreService } from '../../services/exploreService';
 
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Explore', path: '/explore', hasDropdown: true },
-  { name: 'Categories', path: '/categories', hasDropdown: true },
+  { name: 'All Courses', path: '/courses' },
   { name: 'Live Classes', path: '/live-classes' },
   { name: 'Placements', path: '/placements' },
   { name: 'More', isMoreMenu: true, hasDropdown: true },
 ];
 
-const courseCategories = [
-  'Web Development', 'Artificial Intelligence', 'Data Science', 'Cloud Computing',
-  'UI/UX Design', 'Android', 'Cyber Security', 'Digital Marketing'
-];
+// Remove courseCategories as we'll fetch exploreItems dynamically
 
 const moreLinks = [
   { name: 'Blog', path: '/blog' },
@@ -37,9 +37,22 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [exploreItems, setExploreItems] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
+    const fetchNavbarData = async () => {
+      try {
+        const res = await exploreService.getNavbarData();
+        if (res.success && res.data && res.data.explore) {
+          setExploreItems(res.data.explore);
+        }
+      } catch (error) {
+        console.error("Failed to load navbar data", error);
+      }
+    };
+    fetchNavbarData();
+
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -120,16 +133,30 @@ const Navbar = () => {
                             </Link>
                           ))
                         ) : (
-                          courseCategories.map((cat, idx) => (
-                            <Link 
-                              key={idx} 
-                              to={`/courses?category=${encodeURIComponent(cat)}`}
-                              className="px-3 xl:px-4 py-2 xl:py-3 text-[13px] xl:text-sm font-semibold rounded-xl text-[#6B7280] dark:text-slate-300 hover:bg-[#EFF6FF] dark:hover:bg-slate-800 hover:text-[#2563EB] dark:hover:text-blue-400 transition-all flex items-center justify-between group/item"
-                            >
-                              {cat}
-                              <span className="opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-300 text-[#2563EB] dark:text-blue-400">→</span>
-                            </Link>
-                          ))
+                          <div className="grid grid-cols-2 gap-2 p-2">
+                            {exploreItems.length > 0 ? (
+                              exploreItems.slice(0, 16).map((item) => {
+                                const IconComp = HiIcons[item.icon] || HiOutlineBookOpen;
+                                return (
+                                  <Link 
+                                    key={item._id} 
+                                    to={`/explore/${item.slug}`}
+                                    className="px-3 py-2 text-[13px] xl:text-sm font-semibold rounded-xl text-[#6B7280] dark:text-slate-300 hover:bg-[#EFF6FF] dark:hover:bg-slate-800 hover:text-[#2563EB] dark:hover:text-blue-400 transition-all flex items-center gap-2 group/item"
+                                  >
+                                    <IconComp size={16} className="text-[#2563EB] dark:text-blue-400 opacity-70 group-hover/item:opacity-100" />
+                                    <span className="truncate">{item.title}</span>
+                                  </Link>
+                                );
+                              })
+                            ) : (
+                              <div className="col-span-2 p-4 text-center text-sm text-gray-500">Loading programs...</div>
+                            )}
+                            <div className="col-span-2 mt-2 pt-2 border-t border-gray-100 dark:border-slate-800">
+                              <Link to="/explore" className="text-sm font-bold text-[#2563EB] dark:text-blue-400 hover:underline flex items-center justify-center gap-1">
+                                View All Programs <span className="text-lg leading-none">→</span>
+                              </Link>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
